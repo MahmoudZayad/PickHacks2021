@@ -11,7 +11,7 @@ class ScrapeArtist:
         self.response = requests.get(self.url)  # request site response
 
         self.data = BeautifulSoup(self.response.text, "html.parser")  # parse data
-        print(self.data.prettify())
+        # print(self.data.prettify())
         # get array of alphabetic index
         self.artist_index = self.data.findAll(href=re.compile("https://genius.com/artists-index/[a-z]"))
 
@@ -52,6 +52,18 @@ class ScrapeArtist:
         print(link)
         return link # return link to artist page
 
+
+    # find the number of songs
+    def find_songs(self, num, artist):
+        link_response = requests.get(self.find_artist(artist))
+        link_data = BeautifulSoup(link_response.text, "html.parser")
+
+        songs = link_data.findAll('a')
+        print(songs)
+
+        print("SSDFSDF")
+
+
     
     
     
@@ -59,4 +71,4 @@ class ScrapeArtist:
 
 
 sa = ScrapeArtist()
-sa.find_artist("Zach Bryan")
+sa.find_songs(2, "Zach Bryan")
